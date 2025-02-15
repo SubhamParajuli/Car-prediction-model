@@ -38,5 +38,12 @@ The performance of the models is evaluated using **Mean Squared Error (MSE), Roo
 2. Install dependencies:
  ```sh
   pip install -r requirements.txt 
+  jupyter notebook
 
 
+
+🔍 Future Improvements:
+
+Adding more features like car condition, service history, accident records.
+Trying advanced models like XGBoost and Neural Networks.
+Deploying as a web app using Flask or FastAPI.
