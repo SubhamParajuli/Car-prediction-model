@@ -1,12 +1,21 @@
-import re
+import nbformat
 
-# Read the file content
-with open('1_1Data Cleaning Car_drop_model.ipynb', 'r') as file:
-    content = file.read()
+def combine_ipynb(files, output_file):
+    combined_notebook = nbformat.v4.new_notebook()
 
-# Replace all instances of distplot with histplot and add kde=True
-content = re.sub(r'sns\.distplot\(([^)]+)\)', r'sns.histplot(\1, kde=True)', content)
+    for file in files:
+        with open(file, 'r', encoding='utf-8') as f:
+            notebook = nbformat.read(f, as_version=4)
+            combined_notebook.cells.extend(notebook.cells)
 
-# Write the modified content back to the file
-with open('1_1Data Cleaning Car_drop_model.ipynb', 'w') as file:
-    file.write(content)
+    with open(output_file, 'w', encoding='utf-8') as f:
+        nbformat.write(combined_notebook, f)
+
+# List of input .ipynb files to combine
+input_files = ['1_1Data Cleaning Car_drop_model.ipynb', '1__2Data Cleaning Car - with Model.ipynb', 'plots.ipynb','2_Checking the Assumptions with EDA.ipynb','Linear_Regression_fiaal.ipynb','Random_Forest_2_with_model_column_4241_test_error.ipynb']
+
+# Name of the output .ipynb file
+output_file = 'combined_notebook.ipynb'
+
+# Combine the notebooks
+combine_ipynb(input_files, output_file)
